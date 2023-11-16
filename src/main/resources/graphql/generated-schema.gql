@@ -1,0 +1,27 @@
+schema {
+    query: PersonQuery
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+    "When paginating forwards, the cursor to continue."
+    endCursor: String
+    "When paginating forwards, are there more items?"
+    hasNextPage: Boolean!
+    "When paginating backwards, are there more items?"
+    hasPreviousPage: Boolean!
+    "When paginating backwards, the cursor to continue."
+    startCursor: String
+}
+
+type Person {
+    firstName: String!
+    lastName: String!
+}
+
+type PersonQuery {
+    "Say hello to anybody, or the whole world!"
+    getPerson(firstName: String): [Person]!
+    "Returns all people in the database."
+    people: [Person]!
+}

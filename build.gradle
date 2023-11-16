@@ -11,6 +11,7 @@ java {
 	sourceCompatibility = '17'
 }
 
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -22,7 +23,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+	implementation "com.graphql-java-kickstart:graphql-spring-boot-starter:15.0.0"
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
