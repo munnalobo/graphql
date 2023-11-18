@@ -1,5 +1,6 @@
 package com.neuron.poc.graphql.entity;
 
+import graphql.annotations.annotationTypes.GraphQLConstructor;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.annotations.annotationTypes.GraphQLTypeExtension;

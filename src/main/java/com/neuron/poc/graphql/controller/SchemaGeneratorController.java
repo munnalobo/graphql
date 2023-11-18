@@ -3,6 +3,7 @@ package com.neuron.poc.graphql.controller;
 import static graphql.annotations.AnnotationsSchemaCreator.newAnnotationsSchema;
 
 import com.neuron.poc.graphql.entity.Person;
+import com.neuron.poc.graphql.mutation.PersonMutation;
 import com.neuron.poc.graphql.query.PersonQuery;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.SchemaPrinter;
@@ -16,6 +17,7 @@ public class SchemaGeneratorController {
   public String getCurrentSchema() {
     GraphQLSchema schema = newAnnotationsSchema()
         .query(PersonQuery.class)
+        .mutation(PersonMutation.class)
         .build();
 
     SchemaPrinter schemaPrinter = new SchemaPrinter(
