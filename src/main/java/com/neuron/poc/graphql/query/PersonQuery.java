@@ -5,11 +5,13 @@ import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.kickstart.annotations.GraphQLQueryResolver;
+import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
