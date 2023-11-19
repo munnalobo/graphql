@@ -1,41 +1,48 @@
 package com.neuron.poc.graphql.query;
 
 import com.neuron.poc.graphql.entity.Person;
+import com.neuron.poc.graphql.service.PersonService;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.kickstart.annotations.GraphQLQueryResolver;
-import java.lang.annotation.Annotation;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
 @NoArgsConstructor
 @GraphQLQueryResolver
-public class PersonQuery {
+public class PersonQuery implements ApplicationContextAware {
+
+  private static PersonService personService;
 
   @GraphQLField
   @GraphQLNonNull
   @GraphQLDescription("Returns all people in the database.")
+  @GetMapping("/people/all")
   public static List<Person> people() {
-    return List.of(Person.builder()
-        .firstName("John")
-        .lastName("Smith")
-        .build());
+    return personService.getAll();
   }
 
   @GraphQLField
   @GraphQLNonNull
   @GraphQLDescription("Returns all people in the database with the given first name.")
-  public static List<Person> getPerson(final @Nullable String firstName) {
-    return List.of(Person.builder()
-        .firstName("John")
-        .lastName("Smith")
-        .build());
+  @GetMapping("/people")
+  public static List<Person> getPerson(final @RequestParam String firstName) {
+    return personService.getAll();
+  }
+
+
+  @Override
+  public void setApplicationContext(final @NonNull ApplicationContext applicationContext)
+      throws BeansException {
+    personService = applicationContext.getBean(PersonService.class);
   }
 }
