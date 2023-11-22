@@ -5,6 +5,7 @@ import com.neuron.poc.graphql.service.PersonService;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
+import graphql.annotations.annotationTypes.GraphQLType;
 import graphql.kickstart.annotations.GraphQLQueryResolver;
 import java.util.List;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @NoArgsConstructor
 @GraphQLQueryResolver
+@GraphQLType
 public class PersonQuery implements ApplicationContextAware {
 
   private static PersonService personService;

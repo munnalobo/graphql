@@ -2,7 +2,6 @@ package com.neuron.poc.graphql.controller;
 
 import static graphql.annotations.AnnotationsSchemaCreator.newAnnotationsSchema;
 
-import com.neuron.poc.graphql.entity.Person;
 import com.neuron.poc.graphql.mutation.PersonMutation;
 import com.neuron.poc.graphql.query.PersonQuery;
 import graphql.schema.GraphQLSchema;
