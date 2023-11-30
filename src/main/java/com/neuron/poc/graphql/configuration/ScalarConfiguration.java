@@ -1,29 +1,28 @@
 package com.neuron.poc.graphql.configuration;
 
+import graphql.GraphQLContext;
+import graphql.execution.CoercedVariables;
 import graphql.language.StringValue;
+import graphql.language.Value;
 import graphql.schema.Coercing;
 import graphql.schema.CoercingParseLiteralException;
 import graphql.schema.CoercingParseValueException;
 import graphql.schema.CoercingSerializeException;
 import graphql.schema.GraphQLScalarType;
-import graphql.schema.idl.RuntimeWiring;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @NoArgsConstructor
 public class ScalarConfiguration {
-//  @Bean
-  public RuntimeWiring runtimeWiring() {
-    return RuntimeWiring.newRuntimeWiring()
-        .scalar(localDateScalar()) // Use a factory method to create your custom scalars
-        .scalar(localInstantScalar())    // Use a factory method for your other custom scalars
-        .build();
-  }
+
   @Bean
   public GraphQLScalarType localDateScalar() {
     return GraphQLScalarType.newScalar()
@@ -32,7 +31,9 @@ public class ScalarConfiguration {
         .coercing(
             new Coercing<LocalDate, String>() {
               @Override
-              public String serialize(Object dataFetcherResult) throws CoercingSerializeException {
+              public @Nullable String serialize(@NotNull Object dataFetcherResult,
+                  @NotNull GraphQLContext graphQLContext, @NotNull Locale locale)
+                  throws CoercingSerializeException {
                 if (!(dataFetcherResult instanceof LocalDate)) {
                   throw new CoercingSerializeException("LocalDate expected.");
                 }
@@ -40,7 +41,9 @@ public class ScalarConfiguration {
               }
 
               @Override
-              public LocalDate parseValue(Object input) throws CoercingParseValueException {
+              public @Nullable LocalDate parseValue(@NotNull Object input,
+                  @NotNull GraphQLContext graphQLContext, @NotNull Locale locale)
+                  throws CoercingParseValueException {
                 try {
                   return LocalDate.parse(String.valueOf(input));
                 } catch (DateTimeParseException e) {
@@ -49,7 +52,9 @@ public class ScalarConfiguration {
               }
 
               @Override
-              public LocalDate parseLiteral(Object input) throws CoercingParseLiteralException {
+              public @Nullable LocalDate parseLiteral(@NotNull Value<?> input,
+                  @NotNull CoercedVariables variables, @NotNull GraphQLContext graphQLContext,
+                  @NotNull Locale locale) throws CoercingParseLiteralException {
                 try {
                   if (!(input instanceof StringValue)) {
                     throw new CoercingParseLiteralException("String value expected.");
@@ -71,7 +76,9 @@ public class ScalarConfiguration {
         .coercing(
             new Coercing<Instant, String>() {
               @Override
-              public String serialize(Object dataFetcherResult) throws CoercingSerializeException {
+              public @Nullable String serialize(@NotNull Object dataFetcherResult,
+                  @NotNull GraphQLContext graphQLContext, @NotNull Locale locale)
+                  throws CoercingSerializeException {
                 if (!(dataFetcherResult instanceof Instant)) {
                   throw new CoercingSerializeException("Instant expected.");
                 }
@@ -79,7 +86,9 @@ public class ScalarConfiguration {
               }
 
               @Override
-              public Instant parseValue(Object input) throws CoercingParseValueException {
+              public @Nullable Instant parseValue(@NotNull Object input,
+                  @NotNull GraphQLContext graphQLContext, @NotNull Locale locale)
+                  throws CoercingParseValueException {
                 try {
                   return Instant.parse(String.valueOf(input));
                 } catch (DateTimeParseException e) {
@@ -88,7 +97,9 @@ public class ScalarConfiguration {
               }
 
               @Override
-              public Instant parseLiteral(Object input) throws CoercingParseLiteralException {
+              public @Nullable Instant parseLiteral(@NotNull Value<?> input,
+                  @NotNull CoercedVariables variables, @NotNull GraphQLContext graphQLContext,
+                  @NotNull Locale locale) throws CoercingParseLiteralException {
                 try {
                   if (!(input instanceof StringValue)) {
                     throw new CoercingParseLiteralException("String value expected.");

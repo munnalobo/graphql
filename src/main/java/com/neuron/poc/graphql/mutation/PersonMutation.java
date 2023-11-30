@@ -25,6 +25,8 @@ public class PersonMutation {
         Person.builder()
             .firstName(createPerson.getFirstName())
             .lastName(createPerson.getLastName())
+            .dateOfBirth(createPerson.getDateOfBirth())
+            .milestone(createPerson.getMilestone())
             .build();
     log.info("Saving new person: {}", newPerson);
     return newPerson;
