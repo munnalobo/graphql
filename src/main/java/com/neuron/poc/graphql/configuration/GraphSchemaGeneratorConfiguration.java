@@ -9,15 +9,15 @@ import graphql.annotations.processor.GraphQLAnnotations;
 import graphql.schema.GraphQLScalarType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.SchemaPrinter;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class GraphSchemaGeneratorConfiguration {
+
   @Bean
-  public SchemaPrinter schemaPrinter(){
+  public SchemaPrinter schemaPrinter() {
     return new SchemaPrinter(
         SchemaPrinter.Options.defaultOptions()
             .includeScalarTypes(true)
@@ -26,7 +26,7 @@ public class GraphSchemaGeneratorConfiguration {
     );
   }
 
-  public Builder customGraphQLSchema(){
+  public Builder customGraphQLSchema() {
     ScalarConfiguration scalarConfiguration = new ScalarConfiguration();
     GraphQLScalarType localInstantScalar = scalarConfiguration.localInstantScalar();
     GraphQLScalarType localDateScalar = scalarConfiguration.localDateScalar();
@@ -38,14 +38,13 @@ public class GraphSchemaGeneratorConfiguration {
     graphqlAnnotations.getTypeRegistry().put("LocalDate", localDateScalar);
     graphqlAnnotations.getTypeRegistry().put("InputLocalDate", localDateScalar);
 
-
     return newAnnotationsSchema()
         .setAnnotationsProcessor(graphqlAnnotations);
   }
 
   @Bean("personGraphQLSchema")
   @Primary
-  public GraphQLSchema graphQLSchema(){
+  public GraphQLSchema graphQLSchema() {
 
     return customGraphQLSchema()
         .query(PersonQuery.class)

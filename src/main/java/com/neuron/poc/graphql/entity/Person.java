@@ -18,7 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @GraphQLType
-public class Person extends PersonMetadata {
+public class Person {
+
   @GraphQLField
   List<Address> address;
   @GraphQLField
