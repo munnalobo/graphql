@@ -3,6 +3,8 @@ package com.neuron.poc.graphql.entity;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.annotations.annotationTypes.GraphQLType;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @GraphQLType
-public class Person extends PersonMetadata {
+public class Person {
+
   @GraphQLField
   List<Address> address;
   @GraphQLField
@@ -25,5 +28,9 @@ public class Person extends PersonMetadata {
   @GraphQLField
   @GraphQLNonNull
   private String lastName;
+  @GraphQLField
+  private Instant dateOfBirth;
+  @GraphQLField
+  private LocalDate milestone;
 
 }

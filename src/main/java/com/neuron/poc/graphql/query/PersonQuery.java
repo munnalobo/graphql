@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @GraphQLQueryResolver
 @GraphQLType
 public class PersonQuery implements ApplicationContextAware {
-
   private static PersonService personService;
 
   @GraphQLField
